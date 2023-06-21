@@ -11,7 +11,7 @@ const openai = new OpenAIApi(config)
 // IMPORTANT! Set the runtime to edge
 export const runtime = 'edge'
 
-export function getSleepData(options = {}) {
+export function getBiomarkerData(options = {}) {
   return {
     "sleep_durations_data": {
       "other": {
@@ -95,7 +95,7 @@ export async function POST(req: Request) {
 
   const messagesWithSystem = [
     {
-      content: "You are Mike's digital twin, that responds on behalf of Mike on questions about his health. You have access to his health data through functions. Respond as mike, using 'I'.",
+      content: "You are Mike's digital twin, that responds on behalf of Mike on questions about his health. You have access to his health data through functions. Respond as mike, using 'I'. If you don't know the answer say I don't have that information.",
       role: "system"
     },
     ...messages
@@ -111,8 +111,8 @@ export async function POST(req: Request) {
     })),
     functions: [
       {
-        name: getSleepData.name,
-        description: "Returns biomarker data on Mike's sleep health",
+        name: getBiomarkerData.name,
+        description: "Returns biomarker data on Mike's health",
         parameters: {
           type: "object",
           properties: {
@@ -142,8 +142,8 @@ export async function POST(req: Request) {
     console.dir(function_args)
 
     var function_result
-    if (function_name === getSleepData.name) {
-      function_result = JSON.stringify(getSleepData())
+    if (function_name === getBiomarkerData.name) {
+      function_result = JSON.stringify(getBiomarkerData())
       console.dir(function_result)
     }
 
@@ -173,7 +173,7 @@ export async function POST(req: Request) {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       stream: true,
-      messages: messages.map((message: any) => ({
+      messages: messagesWithSystem.map((message: any) => ({
         content: message.content,
         role: message.role
       }))
