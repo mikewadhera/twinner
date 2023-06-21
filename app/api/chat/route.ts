@@ -11,7 +11,7 @@ const openai = new OpenAIApi(config)
 // IMPORTANT! Set the runtime to edge
 export const runtime = 'edge'
 
-export function getBiomarkerData(options = {}) {
+function getBiomarkerData(options = {}) {
   return {
     "sleep_durations_data": {
       "other": {
