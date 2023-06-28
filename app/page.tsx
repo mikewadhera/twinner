@@ -18,7 +18,6 @@ export default function Chat() {
           ))
         : (
             <div className="flex flex-col items-center text-center">
-              <p className="text-gray-600 mb-4">Sample questions:</p>
               <p className="text-gray-600">How is your sleep?</p>
               <p className="text-gray-600">What's your resting heart rate?</p>
             </div>
@@ -30,6 +29,7 @@ export default function Chat() {
           value={input}
           placeholder="Ask something..."
           onChange={handleInputChange}
+          autoFocus
         />
       </form>
     </div>
