@@ -40,8 +40,7 @@ export default function Chat() {
           ))
         : (
             <div className="flex flex-col items-center text-center">
-              <p className="text-gray-600">How is your sleep?</p>
-              <p className="text-gray-600">What's your resting heart rate?</p>
+              
             </div>
         )}
       <div ref={endOfMessagesRef} />
@@ -50,7 +49,7 @@ export default function Chat() {
         <input
           className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
           value={input}
-          placeholder="Ask something..."
+          placeholder="Ask him something..."
           onChange={handleInputChange}
           autoFocus
         />
