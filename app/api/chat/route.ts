@@ -122,8 +122,7 @@ export async function POST(req: Request) {
       },
       {
         name: getActivity.name,
-        description:
-          "Returns Mike's biomarker data for non-sleep activity such as steps and calories burned. Today's date is ${formattedDate}.",
+        description: `Returns Mike's biomarker data for non-sleep activity such as steps and calories burned. Today's date is ${formattedDate}.`,
         parameters: {
           type: "object",
           properties: {
@@ -163,7 +162,6 @@ export async function POST(req: Request) {
     } else if (function_name == getActivity.name) {
       function_result = await getActivity(function_args);
     }
-    //console.log("hihi" + )
     //console.dir(function_result);
 
     const messagesWithSystemAndFunctionResult = [
